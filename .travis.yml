@@ -17,14 +17,15 @@ env:
 #     branch: master
 #     tags: true
 
-# stages:
-#   - name: release
-#     if: branch = master AND (type IN pull_request)
-#   - name: publish
-#     if: branch = master AND (type IN pull_request)
+stages:
+  - test
+  - name: release
+    if: branch = master
+  - name: publish
+    if: branch = master
 
 # deploy stage (only run on condition)
-if: branch = master AND (type IN pull_request)
+# if: branch = master AND (type IN pull_request)
 jobs:
   include:
     # Define test stage
