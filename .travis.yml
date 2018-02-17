@@ -19,10 +19,10 @@ env:
 
 stages:
   - test
-  - name: release
-    if: branch = master
-  - name: publish
-    if: branch = master
+  - name: GitHub-release & WebStore-publish
+    if: branch = master AND (type IN pull_request)
+  # - name: publish
+    # if: branch = master AND (type IN pull_request)
 
 # deploy stage (only run on condition)
 # if: branch = master AND (type IN pull_request)
