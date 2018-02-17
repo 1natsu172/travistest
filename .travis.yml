@@ -22,9 +22,9 @@ env:
 stages:
   - test
   - name: GitHub-release
-    if: branch IS master AND (type IN (pull_request))
+    if: (type IN (pull_request)) AND branch IS master
   - name: WebStore-publish
-    if: branch IS master AND (type IN (pull_request))
+    if: (type IN (pull_request)) AND branch IS master
 
 # deploy stage (only run on condition)
 # if: branch = master AND (type IN pull_request)
