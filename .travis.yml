@@ -19,10 +19,10 @@ env:
 
 stages:
   - test
-  - name: GitHub-release & WebStore-publish
+  - name: GitHub-release
     if: branch = master AND (type IN pull_request)
-  # - name: publish
-    # if: branch = master AND (type IN pull_request)
+  - name: WebStore-publish
+    if: branch = master AND (type IN pull_request)
 
 # deploy stage (only run on condition)
 # if: branch = master AND (type IN pull_request)
@@ -30,16 +30,21 @@ jobs:
   include:
     # Define test stage
     - script: yarn test
-    # Define the deploy stage
-    - stage: GitHub-release & WebStore-publish
-      script: skip # Don't re-execute the test.
-      deploy:
-        provider: script
-        skip_cleanup: true
-        script:
-          - echo semantic-
-      deploy:
-        provider: script
-        skip_cleanup: true
-        script:
-          yarn run build && env WEBSTORE_TOKEN=$(chrome-webstore-manager refresh_token --client_id $CLIENT_ID --client_secret $CLIENT_SECRET --refresh_token $REFRESH_TOKEN) yarn run webstore:update && yarn run webstore:publish
+    # Define the GitHub-release stage
+    - stage: GitHub-release
+    script: skip # Don't re-execute the test.
+    deploy:
+      provider: script
+      skip_cleanup: true
+      script:
+        - echo semantic-
+    # Define the WebStore-publish stage
+    - stage: WebStore-publish
+    script: skip # Don't re-execute the test.
+    before_deploy:
+      export WEBSTORE_TOKEN=$(chrome-webstore-manager refresh_token --client_id $CLIENT_ID --client_secret $CLIENT_SECRET --refresh_token $REFRESH_TOKEN) 
+    deploy:
+      provider: script
+      skip_cleanup: true
+      script:
+        yarn run build && yarn run webstore:update && yarn run webstore:publish
