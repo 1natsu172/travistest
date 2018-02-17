@@ -28,7 +28,7 @@ if: branch = master AND (type IN pull_request)
 jobs:
   include:
     # Define test stage
-    - script: yarn test
+    # - script: yarn test
     # Define the deploy stage
     - stage: GitHub-release & WebStore-publish
       script: skip # Don't re-execute the test.
