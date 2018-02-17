@@ -24,8 +24,8 @@
     "test:tsc": "tsc -p ./tsconfig.test.json",
     "test:ava": "ava 'test/_dist/test/**/*.js' --verbose",
     "test:remove-dist": "rimraf ./test/_dist",
-    "webstore:update": "chrome-webstore-manager update $APP_ITEM_ID ./packages/*.zip",
-    "webstore:publish": "chrome-webstore-manager publish $APP_ITEM_ID",
+    "webstore:update": "echo $WEBSTORE_TOKEN $APP_ITEM_ID",
+    "webstore:publish": "echo $WEBSTORE_TOKEN $APP_ITEM_ID",
     "clean": "rimraf ./packages/*"
   },
   "lint-staged": {
@@ -87,6 +87,7 @@
     "prettier": "^1.9.2",
     "require-dir": "0.x.x",
     "rimraf": "^2.6.2",
+    "semantic-release": "^12.4.1",
     "sinon-chrome": "^2.2.1",
     "standard": "10.x.x",
     "ts-loader": "^2.x.x",
