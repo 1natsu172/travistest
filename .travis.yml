@@ -38,6 +38,7 @@ jobs:
         skip_cleanup: true
         script:
           - echo semantic-
+          - echo suit!
     # Define the WebStore-publish stage
     - stage: WebStore-publish
       script: skip # Don't re-execute the test.
