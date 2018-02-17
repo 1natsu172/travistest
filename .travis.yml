@@ -16,10 +16,10 @@ script:
 #   on:
 #     branch: master
 #     tags: true
-
 jobs:
   include:
-    if: branch = master AND (type IN (pull_request))
+    #if: branch = master AND (type IN (pull_request))
+    - if: branch = master AND (type IN (pull_request))
     # Define the release stage that runs semantic-release
     - stage: semantic-release
       deploy:
