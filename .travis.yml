@@ -17,24 +17,26 @@ script:
 #     branch: master
 #     tags: true
 
-stages:
-  - name: release
-    if: branch = master AND (type IN pull_request)
-  - name: publish
-    if: branch = master AND (type IN pull_request)
+# stages:
+#   - name: release
+#     if: branch = master AND (type IN pull_request)
+#   - name: publish
+#     if: branch = master AND (type IN pull_request)
 
+# deploy stage (only run on condition)
+if: branch = master AND (type IN pull_request)
 jobs:
   include:
-    # Define the release stage that runs semantic-release
-    - stage: release
+    # Define test stage
+    - script: yarn test
+    # Define the deploy stage
+    - stage: GitHub-release & WebStore-publish
       script: skip # Don't re-execute the test.
       deploy:
         provider: script
         skip_cleanup: true
         script:
           - echo semantic-
-    - stage: publish
-      script: skip # Don't re-execute the test.
       deploy:
         provider: script
         skip_cleanup: true
