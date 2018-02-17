@@ -16,18 +16,25 @@ script:
 #   on:
 #     branch: master
 #     tags: true
+
+stages:
+  - name: release
+    if: branch = master AND (type IN pull_request)
+  - name: publish
+    if: branch = master AND (type IN pull_request)
+
 jobs:
   include:
-    #if: branch = master AND (type IN (pull_request))
-    - if: branch = master AND (type IN (pull_request))
     # Define the release stage that runs semantic-release
-    - stage: semantic-release
+    - stage: release
+      script: skip # Don't re-execute the test.
       deploy:
         provider: script
         skip_cleanup: true
         script:
           - echo semantic-
-    - stage: publish-chrome-webstore
+    - stage: publish
+      script: skip # Don't re-execute the test.
       deploy:
         provider: script
         skip_cleanup: true
