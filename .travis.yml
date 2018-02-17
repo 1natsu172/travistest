@@ -39,7 +39,7 @@ jobs:
         provider: script
         skip_cleanup: true
         script:
-          - echo suit-
+          - echo WOW-
     # Define the WebStore-publish stage
     - stage: WebStore-publish
       script: skip # Don't re-execute the test.
